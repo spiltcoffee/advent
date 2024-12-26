@@ -5,3 +5,5 @@ Part 2 answer sourced from these comments:
 - https://www.reddit.com/r/adventofcode/comments/1hg38ah/comment/m2gliho/
 - https://www.reddit.com/r/adventofcode/comments/1hg38ah/comment/m2gge90/
 - https://www.reddit.com/r/adventofcode/comments/1hg38ah/comment/m2glx6y/
+
+EDIT: I need the star for day 25.2, so I've since submitted my illgotten answer.
