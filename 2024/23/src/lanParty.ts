@@ -26,13 +26,27 @@ export class LanParty {
     this.#peers.add(aPeer).add(bPeer);
   }
 
-  findNetworks(): Set<string> {
-    let found = new Set<string>();
+  findSmallestCliques(filterRegExp: RegExp): Set<string> {
+    return this.#peers
+      .values()
+      .filter((peer) => filterRegExp.exec(peer.name))
+      .reduce(
+        (cliques, peer) => cliques.union(peer.findSmallestCliques()),
+        new Set<string>()
+      );
+  }
 
-    for (const peer of this.#peers) {
-      found = found.union(peer.findNetworks());
-    }
-
-    return found;
+  findLargestClique(filterRegExp: RegExp): string {
+    return this.#peers
+      .values()
+      .filter((peer) => filterRegExp.exec(peer.name))
+      .reduce(
+        (cliques, peer) => cliques.union(peer.findLargestCliques()),
+        new Set<string>()
+      )
+      .values()
+      .toArray()
+      .sort(({ length: a }, { length: b }) => b - a)
+      .at(0);
   }
 }

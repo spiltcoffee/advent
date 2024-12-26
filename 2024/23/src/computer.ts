@@ -21,17 +21,17 @@ export class Computer {
     this.#peers.add(peer);
   }
 
-  findNetworks(): Set<string> {
-    let found = new Set<string>();
-
-    for (const peer of this.#peers) {
-      found = found.union(Computer.findNetworks(this, peer));
-    }
-
-    return found;
+  findSmallestCliques(): Set<string> {
+    return this.#peers
+      .values()
+      .reduce(
+        (cliques, peer) =>
+          cliques.union(Computer.findSmallestCliques(this, peer)),
+        new Set<string>()
+      );
   }
 
-  static findNetworks(aPeer: Computer, bPeer: computer): Set<string> {
+  static findSmallestCliques(aPeer: Computer, bPeer: Computer): Set<string> {
     return new Set(
       aPeer.#peers
         .intersection(bPeer.#peers)
@@ -43,5 +43,37 @@ export class Computer {
             .join()
         )
     );
+  }
+
+  //See https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm
+  findLargestCliques(
+    potentialClique = new Set<Computer>(),
+    remainingPeers = this.#peers.union(new Set([this])),
+    excludedPeers = new Set<Computer>()
+  ): Set<string> {
+    if (remainingPeers.size === 0 && excludedPeers.size === 0) {
+      return new Set<string>([
+        potentialClique
+          .values()
+          .map(({ name }) => name)
+          .toArray()
+          .sort()
+          .join()
+      ]);
+    } else {
+      return remainingPeers.values().reduce((clique, peer) => {
+        const setOfPeer = new Set([peer]);
+        clique = clique.union(
+          peer.findLargestCliques(
+            potentialClique.union(setOfPeer),
+            remainingPeers.intersection(peer.#peers),
+            excludedPeers.intersection(peer.#peers)
+          )
+        );
+        remainingPeers = remainingPeers.difference(setOfPeer);
+        excludedPeers = excludedPeers.union(setOfPeer);
+        return clique;
+      }, new Set<string>());
+    }
   }
 }

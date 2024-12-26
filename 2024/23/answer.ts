@@ -4,7 +4,7 @@ import { LanParty } from "./src/lanParty.ts";
 export const answer: AnswerFunction = ([input]) => {
   const lanParty = LanParty.fromInput(input);
 
-  const historianNetworks = lanParty.findNetworks().values().toArray().filter(network => /(^|,)t/.exec(network)).length;
+  const smallestNetworks = lanParty.findSmallestCliques(/t\w/).size;
 
-  return [historianNetworks.toString(), ""];
+  return [smallestNetworks.toString(), lanParty.findLargestClique(/t\w/)];
 };
