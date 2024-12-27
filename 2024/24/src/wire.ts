@@ -1,9 +1,10 @@
 import { Memoize } from "fast-typescript-memoize";
-import { Value } from "./value.ts";
+import { Gate, InitialGate } from "./gate.ts";
 
 export class Wire {
   readonly #name: string;
-  #value: Value;
+  #gate: Gate;
+  #swapGate: Gate;
 
   private constructor(name: string) {
     this.#name = name;
@@ -18,12 +19,34 @@ export class Wire {
     return this.#name;
   }
 
-  set value(value: Value) {
-    this.#value = value;
+  set gate(gate: Gate) {
+    this.#gate = gate;
   }
 
-  @Memoize()
-  get computedValue(): 0 | 1 {
-    return this.#value.computedValue;
+  set swapGate(swapGate: Gate) {
+    this.#swapGate = swapGate;
+  }
+
+  get isSwapped(): boolean {
+    return !!this.#swapGate;
+  }
+
+  resetSwap() {
+    this.#swapGate = undefined;
+  }
+
+  static swap(aWire: Wire, bWire: Wire) {
+    bWire.#swapGate = aWire.#gate;
+    aWire.#swapGate = bWire.#gate;
+  }
+
+  get gate(): 0 | 1 {
+    return (this.#swapGate || this.#gate).value;
+  }
+
+  get mermaid(): string {
+    return !(this.#gate instanceof InitialGate)
+      ? `    ${this.#gate.name}[${this.#gate.type}] === ${this.#name}{${this.#name}}`
+      : "";
   }
 }
