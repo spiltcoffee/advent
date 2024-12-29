@@ -2,6 +2,7 @@ import { AnswerFunction } from "../../answer.ts";
 
 export const answer: AnswerFunction = ([input]) => {
   let distance = 0;
+  let aim = 0;
   let depth = 0;
 
   input.split("\n").forEach((line) => {
@@ -11,19 +12,21 @@ export const answer: AnswerFunction = ([input]) => {
     switch (action) {
       case "forward":
         distance += num;
+        depth += num * aim;
         break;
       case "down":
-        depth += num;
+        aim += num;
         break;
       case "up":
-        depth -= num;
+        aim -= num;
         break;
       default:
         throw new Error(`Unknown action "${action}"`);
     }
   });
 
-  const course = distance * depth;
+  const part1Course = distance * aim;
+  const part2Course = distance * depth;
 
-  return [course.toString(), ""];
+  return [part1Course.toString(), part2Course.toString()];
 };
