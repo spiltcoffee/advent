@@ -30,5 +30,32 @@ jobs:
                 exit 1
             )
 
-      - run: npm run test
-      - run: npm run real
+      - run: npm run test -- --year 2015
+      - run: npm run real -- --year 2015
+
+      - run: npm run test -- --year 2016
+      - run: npm run real -- --year 2016
+
+      - run: npm run test -- --year 2017
+      - run: npm run real -- --year 2017
+
+      - run: npm run test -- --year 2018
+      - run: npm run real -- --year 2018
+
+      - run: npm run test -- --year 2019
+      - run: npm run real -- --year 2019
+
+      - run: npm run test -- --year 2020
+      - run: npm run real -- --year 2020
+
+      - run: npm run test -- --year 2021
+      - run: npm run real -- --year 2021
+
+      - run: npm run test -- --year 2022
+      - run: npm run real -- --year 2022
+
+      - run: npm run test -- --year 2023
+      - run: npm run real -- --year 2023
+
+      - run: npm run test -- --year 2024
+      - run: npm run real -- --year 2024
