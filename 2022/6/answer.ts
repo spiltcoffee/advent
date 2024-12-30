@@ -13,7 +13,7 @@ function indexOfMarker(input: string, markerLen: number) {
 
 export const answer: AnswerFunction = ([input]) => {
   const lines = input.split("\n");
-  const packetMarkers = lines.map((line) => indexOfMarker(line, 4)).join("");
-  const messageMarkers = lines.map((line) => indexOfMarker(line, 14)).join("");
+  const packetMarkers = lines.map((line) => indexOfMarker(line, 4));
+  const messageMarkers = lines.map((line) => indexOfMarker(line, 14));
   return [packetMarkers, messageMarkers];
 };
