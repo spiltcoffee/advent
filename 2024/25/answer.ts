@@ -21,5 +21,5 @@ export const answer: AnswerFunction = ([input]) => {
     keys.filter((key) => lock.fitsWith(key)).map((key) => ({ lock, key }))
   );
 
-  return [uniquePairs.length.toString()];
+  return [uniquePairs.length];
 };
