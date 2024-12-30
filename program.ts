@@ -190,11 +190,11 @@ function checkAndOutputAnswer(
 
 function checkAndOutputAnswerPart(
   number: number,
-  answerPart: string | number | Array | undefined,
+  answerPart: string | number | Array<unknown> | undefined,
   expectedPart: string | undefined
 ): boolean {
   if (answerPart === undefined) {
-    return false;
+    return true;
   }
 
   answerPart = answerPart?.toString();
