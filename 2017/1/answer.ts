@@ -2,7 +2,7 @@ import { AnswerFunction } from "../../answer.ts";
 import { Maths } from "../../common/maths.ts";
 
 export const answer: AnswerFunction = ([input]) => {
-  const numbers = input.split("").map(Maths.toNumber);
+  const numbers = input.split("").map(Maths.parseInt);
 
   let part1RollingTotal = 0;
   let part2RollingTotal = 0;

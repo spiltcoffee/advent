@@ -2,7 +2,7 @@ import { AnswerFunction } from "../../answer.ts";
 import { Maths } from "../../common/maths.ts";
 
 export const answer: AnswerFunction = ([input]) => {
-  const changes = input.split("\n").map(Maths.toNumber);
+  const changes = input.split("\n").map(Maths.parseInt);
   const totalChange = Maths.sum(changes);
 
   let repeatedFreq: number;

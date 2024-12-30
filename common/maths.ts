@@ -27,7 +27,7 @@ export class Maths {
     return b - a;
   }
 
-  static toNumber(str: string): number {
+  static parseInt(str: string): number {
     return Number.parseInt(str, 10);
   }
 }
