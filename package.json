@@ -5,7 +5,8 @@
   "scripts": {
     "test": "tsx advent.ts test",
     "real": "tsx advent.ts real",
-    "format": "prettier --write \"**/*.{ts,json,md,yml}\" --log-level error",
+    "preformat": "npm run build --workspace prettier-plugin-advent",
+    "format": "prettier --write \"**/*.{ts,json,md,yml,txt}\" --log-level error",
     "lint": "eslint --flag unstable_ts_config --fix \"**/*.ts\" --ignore-pattern \"template/*.ts\""
   },
   "license": "ISC",
@@ -38,5 +39,8 @@
   },
   "optionalDependencies": {
     "@mermaid-js/mermaid-cli": "^11.4.2"
-  }
+  },
+  "workspaces": [
+    "prettier-plugin-advent"
+  ]
 }

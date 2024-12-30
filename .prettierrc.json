@@ -1,4 +1,5 @@
 {
   "endOfLine": "lf",
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "plugins": ["prettier-plugin-advent"]
 }
