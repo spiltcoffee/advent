@@ -4,14 +4,17 @@ import { Maths } from "../../common/maths.ts";
 export const answer: AnswerFunction = ([input]) => {
   const numbers = input.split("").map(Maths.toNumber);
 
-  let rollingTotal = 0;
+  let part1RollingTotal = 0;
+  let part2RollingTotal = 0;
 
-  numbers.reduce((prev, curr) => {
-    if (prev === curr) {
-      rollingTotal += curr;
+  numbers.forEach((num, index, array) => {
+    if (num === array.at(index - 1)) {
+      part1RollingTotal += num;
     }
-    return curr;
-  }, numbers.at(-1));
+    if (num === array.at(index - array.length / 2)) {
+      part2RollingTotal += num;
+    }
+  });
 
-  return [rollingTotal];
+  return [part1RollingTotal, part2RollingTotal];
 };
