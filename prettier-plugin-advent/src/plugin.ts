@@ -27,7 +27,7 @@ export const parsers: Record<string, Parser<string>> = {
 export const printers: Record<string, Printer<string>> = {
   "advent-io": {
     print(path) {
-      return path.getNode().trim();
+      return path.getNode().trimEnd();
     }
   }
 };
