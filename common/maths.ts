@@ -26,4 +26,8 @@ export class Maths {
   static compDesc(a: number, b: number) {
     return b - a;
   }
+
+  static toNumber(str: string): number {
+    return Number.parseInt(str, 10);
+  }
 }
