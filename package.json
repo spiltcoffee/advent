@@ -6,7 +6,7 @@
     "test": "tsx advent.ts test",
     "real": "tsx advent.ts real",
     "format": "prettier --write \"**/*.{ts,json,md,yml}\" --log-level error",
-    "lint": "eslint --flag unstable_ts_config --fix \"**/*.ts\""
+    "lint": "eslint --flag unstable_ts_config --fix \"**/*.ts\" --ignore-pattern \"template/*.ts\""
   },
   "license": "ISC",
   "author": {
