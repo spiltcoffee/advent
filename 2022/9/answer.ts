@@ -91,8 +91,5 @@ function doAnswer(input: string, tailLength: number) {
 }
 
 export const answer: AnswerFunction = ([part1, part2]) => {
-  return [
-    doAnswer(part1, 1).toString(),
-    doAnswer(part2 || part1, 9).toString()
-  ];
+  return [doAnswer(part1, 1), doAnswer(part2 || part1, 9)];
 };

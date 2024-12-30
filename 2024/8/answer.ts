@@ -34,5 +34,5 @@ export const answer: AnswerFunction = ([input]) => {
   const simpleAntinodes = simpleMap.count;
   const advancedAnitnodes = advancedMap.count;
 
-  return [simpleAntinodes.toString(), advancedAnitnodes.toString()];
+  return [simpleAntinodes, advancedAnitnodes];
 };

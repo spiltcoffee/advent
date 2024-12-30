@@ -55,5 +55,5 @@ export const answer: AnswerFunction = ([input]) => {
     .sort((a, b) => b - a)
     .at(0);
 
-  return [secretsTotalAfter2000.toString(), bestBananas.toString()];
+  return [secretsTotalAfter2000, bestBananas];
 };

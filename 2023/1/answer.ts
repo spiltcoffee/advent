@@ -55,5 +55,5 @@ export const answer: AnswerFunction = ([part1, part2], type) => {
     })
   );
 
-  return [part1Total.toString(), part2Total.toString()];
+  return [part1Total, part2Total];
 };

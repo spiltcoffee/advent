@@ -18,5 +18,5 @@ export const answer: AnswerFunction = ([input]) => {
 
   const enabledResult = eval(getMultiplierString(stripDisabled(input)));
 
-  return [basicResult.toString(), enabledResult.toString()];
+  return [basicResult, enabledResult];
 };

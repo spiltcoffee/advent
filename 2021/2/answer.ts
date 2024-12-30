@@ -28,5 +28,5 @@ export const answer: AnswerFunction = ([input]) => {
   const part1Course = distance * aim;
   const part2Course = distance * depth;
 
-  return [part1Course.toString(), part2Course.toString()];
+  return [part1Course, part2Course];
 };

@@ -19,5 +19,5 @@ export const answer: AnswerFunction = ([input]) => {
     elvesCalories[maxElf] = 0;
   }
 
-  return [topCalories.toString(), topThree.toString()];
+  return [topCalories, topThree];
 };

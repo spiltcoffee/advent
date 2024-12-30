@@ -14,5 +14,5 @@ export const answer: AnswerFunction = async ([input] /*, type*/) => {
     map.endTile.getShortestPaths().flatMap((path) => path)
   );
 
-  return [shortestDistance.toString(), shortestPaths.size.toString()];
+  return [shortestDistance, shortestPaths.size];
 };

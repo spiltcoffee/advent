@@ -50,5 +50,5 @@ export const answer: AnswerFunction = ([input]) => {
   );
   const totalEpiphany = scoresEpiphany.reduce((a, b) => a + b, 0);
 
-  return [totalMisunderstanding.toString(), totalEpiphany.toString()];
+  return [totalMisunderstanding, totalEpiphany];
 };

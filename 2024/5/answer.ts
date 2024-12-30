@@ -30,8 +30,5 @@ export const answer: AnswerFunction = ([input]) => {
     .map((update) => update.fixUpdate())
     .reduce((total, update) => total + update.middlePage?.pageNum, 0);
 
-  return [
-    validUpdatesMidPageTotal.toString(),
-    invalidUpdatesMidPageTotal.toString()
-  ];
+  return [validUpdatesMidPageTotal, invalidUpdatesMidPageTotal];
 };

@@ -64,5 +64,5 @@ export const answer: AnswerFunction = ([input]) => {
   );
   const directorySizeToDelete = Math.min(...largestDirectories);
 
-  return [smallestTotal.toString(), directorySizeToDelete.toString()];
+  return [smallestTotal, directorySizeToDelete];
 };

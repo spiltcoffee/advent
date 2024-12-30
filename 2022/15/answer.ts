@@ -147,5 +147,5 @@ export const answer: AnswerFunction = ([input], type) => {
 
   const tuningFreq = distressBeacon.x * 4000000 + distressBeacon.y;
 
-  return [positionsWithoutBeacons.toString(), tuningFreq.toString()];
+  return [positionsWithoutBeacons, tuningFreq];
 };

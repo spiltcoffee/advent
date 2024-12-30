@@ -184,5 +184,5 @@ class Garden extends Map<Plant> {
 
 export const answer: AnswerFunction = ([input]) => {
   const garden = Garden.fromInput(input);
-  return [garden.cost.toString(), garden.bulkCost.toString()];
+  return [garden.cost, garden.bulkCost];
 };

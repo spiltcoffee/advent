@@ -1,4 +1,4 @@
-import { modulo } from "../../../common/modulo.ts";
+import { Maths } from "../../../common/maths.ts";
 
 class Registers {
   A: number;
@@ -178,7 +178,7 @@ export class Program {
   }
 
   private bst(operand: number): void {
-    this.#registers.B = modulo(this.getComboOperand(operand), 8);
+    this.#registers.B = Maths.modulo(this.getComboOperand(operand), 8);
   }
 
   private jnz(operand: number): void {
@@ -195,7 +195,7 @@ export class Program {
   }
 
   private out(operand: number): void {
-    this.#output.push(modulo(this.getComboOperand(operand), 8));
+    this.#output.push(Maths.modulo(this.getComboOperand(operand), 8));
   }
 
   private bdv(operand: number): void {

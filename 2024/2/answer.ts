@@ -42,5 +42,5 @@ export const answer: AnswerFunction = ([input]) => {
   const safeReports = reports.filter(isSafeReport).length;
   const dampenedReports = reports.filter(isDampenedReport).length;
 
-  return [safeReports.toString(), dampenedReports.toString()];
+  return [safeReports, dampenedReports];
 };

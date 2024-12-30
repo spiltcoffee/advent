@@ -62,5 +62,5 @@ export const answer: AnswerFunction = ([input]) => {
 
   const decoderKey = (divider2IndexOf + 1) * (divider6IndexOf + 1);
 
-  return [sumOfOrderedIndicies.toString(), decoderKey.toString()];
+  return [sumOfOrderedIndicies, decoderKey];
 };

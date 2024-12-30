@@ -35,5 +35,5 @@ export const answer: AnswerFunction = ([input]) => {
     0
   );
 
-  return [totalDistance.toString(), similarityScore.toString()];
+  return [totalDistance, similarityScore];
 };

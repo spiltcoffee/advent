@@ -257,8 +257,5 @@ export const answer: AnswerFunction = ([input]) => {
     .sort((a, b) => b - a)
     .at(-1);
 
-  return [
-    (pathToPeak.length - 1).toString(),
-    (shortestPathFromLowestElevation - 1).toString()
-  ];
+  return [pathToPeak.length - 1, shortestPathFromLowestElevation - 1];
 };

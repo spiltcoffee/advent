@@ -90,5 +90,5 @@ export const answer: AnswerFunction = ([input]) => {
     .map((game) => game.findMinimumSet())
     .map((gameSet) => gameSet.power())
     .reduce((total, power) => total + power, 0);
-  return [sumOfValidIds.toString(), sumOfMinimumPowers.toString()];
+  return [sumOfValidIds, sumOfMinimumPowers];
 };

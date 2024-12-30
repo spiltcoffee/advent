@@ -41,5 +41,5 @@ export const answer: AnswerFunction = ([input]) => {
     0
   );
 
-  return [prioritiesTotal.toString(), groupItemPrioritiesTotal.toString()];
+  return [prioritiesTotal, groupItemPrioritiesTotal];
 };

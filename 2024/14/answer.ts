@@ -137,5 +137,5 @@ export const answer: AnswerFunction = async ([input], type) => {
 
   const firstFrame = type === "test" ? NaN : 6888;
 
-  return [safetyAfter100s.toString(), firstFrame.toString()];
+  return [safetyAfter100s, firstFrame];
 };

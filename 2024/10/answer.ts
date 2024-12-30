@@ -12,5 +12,5 @@ export const answer: AnswerFunction = ([input]) => {
     }),
     { trailEnds: 0, distinctTrailEnds: 0 }
   );
-  return [trailEnds.toString(), distinctTrailEnds.toString()];
+  return [trailEnds, distinctTrailEnds];
 };

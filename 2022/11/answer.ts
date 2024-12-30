@@ -156,5 +156,5 @@ export const answer: AnswerFunction = ([input]) => {
   const part1 = findMonkeyBusiness(input, 20, 3);
   const part2 = findMonkeyBusiness(input, 10000, 1);
 
-  return [part1.toString(), part2.toString()];
+  return [part1, part2];
 };

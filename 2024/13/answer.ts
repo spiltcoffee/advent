@@ -134,5 +134,5 @@ export const answer: AnswerFunction = ([input]) => {
     .filter((clawMachine) => !Number.isNaN(clawMachine.tokens))
     .reduce((total, clawMachine) => total + clawMachine.tokens, 0);
 
-  return [part1TotalTokens.toString(), part2TotalTokens.toString()];
+  return [part1TotalTokens, part2TotalTokens];
 };

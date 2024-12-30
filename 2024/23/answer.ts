@@ -6,5 +6,5 @@ export const answer: AnswerFunction = ([input]) => {
 
   const smallestNetworks = lanParty.findSmallestCliques(/t\w/).size;
 
-  return [smallestNetworks.toString(), lanParty.findLargestClique(/t\w/)];
+  return [smallestNetworks, lanParty.findLargestClique(/t\w/)];
 };

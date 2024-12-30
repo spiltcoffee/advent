@@ -60,5 +60,5 @@ export const answer: AnswerFunction = ([input]) => {
     ...scenicTrees.map((row) => Math.max(...row))
   );
 
-  return [totalVisibleTrees.toString(), mostScenicTreeScore.toString()];
+  return [totalVisibleTrees, mostScenicTreeScore];
 };

@@ -14,5 +14,6 @@ export const answer: AnswerFunction = ([input, params]) => {
     );
   const part1TotalCheats = raceTrack.getTotalCheatsAtOrAbove(...part1Params);
   const part2TotalCheats = raceTrack.getTotalCheatsAtOrAbove(...part2Params);
-  return [part1TotalCheats.toString(), part2TotalCheats.toString()];
+
+  return [part1TotalCheats, part2TotalCheats];
 };

@@ -15,5 +15,5 @@ export const answer: AnswerFunction = ([input]) => {
     .filter((calibration) => calibration.isValidPart2())
     .reduce((total, curr) => total + curr.target, BigInt(0));
 
-  return [part1Total.toString(), part2Total.toString()];
+  return [part1Total, part2Total];
 };

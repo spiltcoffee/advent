@@ -1,6 +1,6 @@
 import { BigNumber } from "bignumber.js";
 import { Direction } from "./direction.ts";
-import { modulo } from "./modulo.ts";
+import { Maths } from "./maths.ts";
 
 export class Coordinate {
   readonly x: number;
@@ -97,8 +97,8 @@ export class Coordinate {
 
   wrap(limit: Coordinate): Coordinate {
     return new Coordinate(
-      modulo(this.x, limit.x + 1),
-      modulo(this.y, limit.y + 1)
+      Maths.modulo(this.x, limit.x + 1),
+      Maths.modulo(this.y, limit.y + 1)
     );
   }
 

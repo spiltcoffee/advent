@@ -50,5 +50,5 @@ export const answer: AnswerFunction = ([input]) => {
 
   const pixelDisplay = renderDisplay(signals);
 
-  return [totalSignalStrengths.toString(), pixelDisplay];
+  return [totalSignalStrengths, pixelDisplay];
 };

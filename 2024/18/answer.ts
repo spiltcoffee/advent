@@ -7,8 +7,5 @@ export const answer: AnswerFunction = ([input, params]) => {
 
   const memorySpacePart2 = MemorySpace.fromInput(input, params);
   const firstBlockingByte = memorySpacePart2.findFirstBlockingByte();
-  return [
-    memorySpacePart1.endSpace.distance.toString(),
-    firstBlockingByte.toString()
-  ];
+  return [memorySpacePart1.endSpace.distance, firstBlockingByte];
 };

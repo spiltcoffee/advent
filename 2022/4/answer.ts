@@ -28,7 +28,7 @@ export const answer: AnswerFunction = ([input]) => {
   );
 
   return [
-    overlappingPairs.filter(Boolean).length.toString(),
-    intersectingPairs.filter(Boolean).length.toString()
+    overlappingPairs.filter(Boolean).length,
+    intersectingPairs.filter(Boolean).length
   ];
 };

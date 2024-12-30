@@ -32,5 +32,5 @@ export const answer: AnswerFunction = ([input]) => {
     wideWarehouse.moveRobot(direction);
   });
 
-  return [warehouse.gpsTotal.toString(), wideWarehouse.gpsTotal.toString()];
+  return [warehouse.gpsTotal, wideWarehouse.gpsTotal];
 };

@@ -34,5 +34,5 @@ export const answer: AnswerFunction = async ([input], type) => {
   //   }
   // });
 
-  return [device.z.toString(), swappedWires];
+  return [device.z, swappedWires];
 };

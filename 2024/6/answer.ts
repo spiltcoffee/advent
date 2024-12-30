@@ -9,5 +9,5 @@ export const answer: AnswerFunction = ([input]) => {
   const { count: cellsVisited } = guard.visitPatrol(map);
   const { count: cellsBlocked } = guard.blockPatrol(map);
 
-  return [cellsVisited.toString(), cellsBlocked.toString()];
+  return [cellsVisited, cellsBlocked];
 };

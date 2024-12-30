@@ -190,12 +190,14 @@ function checkAndOutputAnswer(
 
 function checkAndOutputAnswerPart(
   number: number,
-  answerPart: string | undefined,
+  answerPart: string | number | Array | undefined,
   expectedPart: string | undefined
 ): boolean {
   if (answerPart === undefined) {
     return false;
   }
+
+  answerPart = answerPart?.toString();
 
   const checked = answerPart === expectedPart;
   const checkedStr = checked ? "✅" : " ";

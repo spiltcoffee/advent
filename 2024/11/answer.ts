@@ -74,5 +74,5 @@ export const answer: AnswerFunction = ([input]) => {
     0
   );
 
-  return [blink25TimesTotal.toString(), blink75TimesTotal.toString()];
+  return [blink25TimesTotal, blink75TimesTotal];
 };

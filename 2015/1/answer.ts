@@ -9,5 +9,5 @@ export const answer: AnswerFunction = ([input]) => {
     }
     return floor;
   }, 0);
-  return [floor.toString(), basementPos.toString()];
+  return [floor, basementPos];
 };

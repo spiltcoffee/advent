@@ -29,5 +29,5 @@ export const answer: AnswerFunction = ([input]) => {
     [Infinity, Infinity, Infinity]
   );
 
-  return [part1Increments.toString(), part2Increments.toString()];
+  return [part1Increments, part2Increments];
 };

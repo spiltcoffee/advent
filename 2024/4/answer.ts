@@ -12,5 +12,5 @@ export const answer: AnswerFunction = ([input]) => {
     .map((currentCoord) => wordsearch.findMasCross(currentCoord))
     .filter(Boolean).length;
 
-  return [xmasLineFinds.toString(), maxCrossFinds.toString()];
+  return [xmasLineFinds, maxCrossFinds];
 };

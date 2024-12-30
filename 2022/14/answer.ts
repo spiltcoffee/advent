@@ -144,5 +144,5 @@ export const answer: AnswerFunction = ([input]) => {
   const part1 = calculateSand(lines, false);
   const part2 = calculateSand(lines, true);
 
-  return [part1.toString(), part2.toString()];
+  return [part1, part2];
 };
