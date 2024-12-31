@@ -17,9 +17,8 @@ function directionFromChar(char: string) {
   }
 }
 
-export const answer: AnswerFunction = ([input]) => {
+function visitedHouses(directions: Direction[]): Set<string> {
   const visited = new Set<string>([Coordinate.ORIGIN.toString()]);
-  const directions = input.split("").map(directionFromChar);
 
   directions.reduce((coordinate, direction) => {
     coordinate = coordinate.add(Coordinate.fromDirection(direction));
@@ -27,5 +26,29 @@ export const answer: AnswerFunction = ([input]) => {
     return coordinate;
   }, Coordinate.ORIGIN);
 
-  return [visited.size];
+  return visited;
+}
+
+export const answer: AnswerFunction = ([input]) => {
+  const directions = input.split("").map(directionFromChar);
+
+  const part1Visited = visitedHouses(directions).size;
+
+  const [santaDirections, robotDirections] = directions.reduce(
+    ([santa, robot], direction, index) => {
+      if (index % 2 === 0) {
+        santa.push(direction);
+      } else {
+        robot.push(direction);
+      }
+      return [santa, robot];
+    },
+    [[], []] as [Direction[], Direction[]]
+  );
+
+  const part2Visited = visitedHouses(santaDirections).union(
+    visitedHouses(robotDirections)
+  ).size;
+
+  return [part1Visited, part2Visited];
 };
