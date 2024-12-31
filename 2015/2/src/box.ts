@@ -1,28 +1,34 @@
 import { Maths } from "../../../common/maths.ts";
 
 export class Box {
-  readonly #length: number;
-  readonly #width: number;
-  readonly #height: number;
+  readonly #edges: number[];
 
-  private constructor(length: number, width: number, height: number) {
-    this.#length = length;
-    this.#width = width;
-    this.#height = height;
+  private constructor(edges: number[]) {
+    this.#edges = edges;
   }
 
   static fromLine(line: string): Box {
-    const [length, width, height] = line.split("x").map(Maths.parseInt);
-    return new Box(length, width, height);
+    const edges = line.split("x").map(Maths.parseInt);
+    return new Box(edges);
   }
 
   get wrappingPaper(): number {
-    const sides = [
-      this.#length * this.#width,
-      this.#width * this.#height,
-      this.#height * this.#length
-    ];
+    const sides = this.#edges.reduce(
+      (sides, edge, index, array) => sides.concat(edge * array.at(index - 1)),
+      []
+    );
     const excess = Math.min(...sides);
     return Maths.sum(sides.map((side) => side * 2).concat(excess));
+  }
+
+  get ribbon(): number {
+    return (
+      Maths.sum(
+        this.#edges
+          .toSorted(Maths.compAsc)
+          .slice(0, 2)
+          .map((edge) => edge * 2)
+      ) + this.#edges.reduce((total, edge) => total * edge, 1)
+    );
   }
 }

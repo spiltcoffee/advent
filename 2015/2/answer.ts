@@ -6,6 +6,7 @@ export const answer: AnswerFunction = ([input]) => {
   const boxes = input.split("\n").map(Box.fromLine);
 
   const wrappingPaper = Maths.sum(boxes.map((box) => box.wrappingPaper));
+  const ribbon = Maths.sum(boxes.map((box) => box.ribbon));
 
-  return [wrappingPaper];
+  return [wrappingPaper, ribbon];
 };

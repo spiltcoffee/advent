@@ -19,10 +19,12 @@ export class Maths {
     return nums.reduce((total, num) => total + num, 0);
   }
 
+  /** 2,1,3 -> 1,2,3 */
   static compAsc(a: number, b: number) {
     return a - b;
   }
 
+  /** 2,1,3 -> 3,2,1 */
   static compDesc(a: number, b: number) {
     return b - a;
   }
