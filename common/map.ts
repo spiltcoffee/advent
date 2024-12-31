@@ -75,7 +75,7 @@ export class Map<T> {
     );
   }
 
-  forEachMapCell(callback: (cell: T, coord: Coordinate) => void) {
+  forEachMapCell(callback: (cell: T, coordinate: Coordinate) => void) {
     this.#map.forEach((row, y) =>
       row.forEach((cell, x) => callback(cell, new Coordinate(x, y)))
     );
