@@ -1,0 +1,1 @@
+I'm sure there's some way to analyse the input to figure out which numbers to add... but PCs are much more powerful in 2025, so fuck it, brute force. Only takes about ~10s for both parts, but still putting the flag here as it's greater than 1s on average.
