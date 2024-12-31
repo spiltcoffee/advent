@@ -8,5 +8,9 @@ export const answer: AnswerFunction = ([input]) => {
     .map((detector) => detector.isNice)
     .filter(Boolean).length;
 
-  return [niceCount];
+  const betterNiceCount = detectors
+    .map((detector) => detector.isBetterNice)
+    .filter(Boolean).length;
+
+  return [niceCount, betterNiceCount];
 };
