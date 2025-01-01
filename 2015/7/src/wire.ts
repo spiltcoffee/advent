@@ -27,14 +27,9 @@ export class NamedWire extends Wire {
   readonly #name: string;
   #gate: Gate;
 
-  private constructor(name: string) {
+  constructor(name: string) {
     super();
     this.#name = name;
-  }
-
-  @Memoize()
-  static fromName(name: string) {
-    return new NamedWire(name);
   }
 
   get name(): string {

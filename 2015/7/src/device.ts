@@ -59,7 +59,8 @@ export class Device {
     const value = Maths.parseInt(nameOrValue);
 
     const wire = Number.isNaN(value)
-      ? NamedWire.fromName(nameOrValue)
+      ? (this.#wires.values().find(({ name }) => name === nameOrValue) ??
+        new NamedWire(nameOrValue))
       : new FixedWire(value);
 
     this.#wires.add(wire);
@@ -69,5 +70,12 @@ export class Device {
 
   get aValue(): number {
     return this.#wires.values().find(({ name }) => name === "a").value;
+  }
+
+  set overrideB(value: number) {
+    const bWire = this.#wires
+      .values()
+      .find(({ name }) => name === "b") as NamedWire;
+    bWire.gate = new WireGate(new FixedWire(value));
   }
 }
