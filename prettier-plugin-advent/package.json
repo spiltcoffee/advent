@@ -6,7 +6,7 @@
     "build": "esbuild src/plugin.ts --bundle --platform=node --outfile=target/plugin.js --log-level=error"
   },
   "devDependencies": {
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.0",
     "prettier": "^3.4.1"
   },
   "peerDependencies": {
