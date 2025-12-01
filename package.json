@@ -7,7 +7,7 @@
     "real": "tsx advent.ts real",
     "preformat": "npm run build --workspace prettier-plugin-advent",
     "format": "prettier --write \"**/*.{ts,json,md,yml,txt}\" --log-level error",
-    "lint": "eslint --flag unstable_ts_config --fix \"**/*.ts\" --ignore-pattern \"template/*.ts\""
+    "lint": "eslint --fix \"**/*.ts\" --ignore-pattern \"template/*.ts\""
   },
   "license": "ISC",
   "author": {
