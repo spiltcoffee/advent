@@ -3,10 +3,10 @@
   "private": true,
   "main": "target/plugin.js",
   "scripts": {
-    "build": "esbuild src/plugin.ts --bundle --platform=node --outfile=target/plugin.js --log-level=error"
+    "build": "esbuild src/plugin.ts --bundle --platform=node --outdir=target/ --log-level=error"
   },
   "devDependencies": {
-    "esbuild": "^0.27.0",
+    "esbuild-wasm": "^0.27.0",
     "prettier": "^3.4.1"
   },
   "peerDependencies": {
