@@ -32,4 +32,15 @@ export class Maths {
   static parseInt(str: string): number {
     return Number.parseInt(str, 10);
   }
+
+  static range(start: number, stop: number, step: number = 1) {
+    return Array.from(
+      { length: Math.ceil((stop - start) / step) },
+      (_, i) => start + i * step
+    );
+  }
+
+  static rangeClosed(start: number, stop: number, step: number = 1) {
+    return this.range(start, stop + 1, step);
+  }
 }
