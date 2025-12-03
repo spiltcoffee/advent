@@ -59,3 +59,6 @@ jobs:
 
       - run: npm run test -- --year 2024
       - run: npm run real -- --year 2024
+
+      - run: npm run test -- --year 2025
+      - run: npm run real -- --year 2025
