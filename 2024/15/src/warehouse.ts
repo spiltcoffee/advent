@@ -67,7 +67,7 @@ export class Warehouse extends Map<Tile> {
   draw(): string {
     let y = 0;
     let output = "";
-    this.forEachMapCell((cell, coord) => {
+    this.forEach((cell, coord) => {
       if (coord.y > y) {
         output += "\n";
         y++;

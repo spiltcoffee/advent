@@ -105,7 +105,7 @@ class Robot {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, dimensions.x, dimensions.y);
 
-    room.forEachMapCell((robots: number, coord: Coordinate) => {
+    room.forEach((robots: number, coord: Coordinate) => {
       if (robots > 0) {
         ctx.fillPixelWithColor(coord.x, coord.y, 0xffffffff);
       }

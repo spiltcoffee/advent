@@ -30,7 +30,7 @@ export class HikingMap extends Map<Trail> {
   }
 
   linkTrails() {
-    this.forEachMapCell((trail, coord) => {
+    this.forEach((trail, coord) => {
       trail.addHigherTrails(
         this.getMapCells(
           NEARBY_COORDS.map((surroundingCoord) => coord.add(surroundingCoord))

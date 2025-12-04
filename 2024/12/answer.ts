@@ -150,7 +150,7 @@ class Garden extends Map<Plant> {
   private constructor(map: Plant[][]) {
     super(map);
     this.planterBoxes = [];
-    this.forEachMapCell((plant) => {
+    this.forEach((plant) => {
       if (!plant.isInPlanterBox) {
         this.planterBoxes.push(PlanterBox.fromPlant(plant, this));
       }

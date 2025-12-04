@@ -75,9 +75,21 @@ export class Map<T> {
     );
   }
 
-  forEachMapCell(callback: (cell: T, coordinate: Coordinate) => void) {
+  forEach(callback: (cell: T, coordinate: Coordinate) => void) {
     this.#map.forEach((row, y) =>
       row.forEach((cell, x) => callback(cell, new Coordinate(x, y)))
     );
+  }
+
+  reduce<R>(
+    callback: (accumulator: R, cell: T, coordinate: Coordinate) => R,
+    startValue: R
+  ) {
+    let accumulator = startValue;
+    this.forEach(
+      (cell, coordinate) =>
+        (accumulator = callback(accumulator, cell, coordinate))
+    );
+    return accumulator;
   }
 }

@@ -9,7 +9,7 @@ export class LightGrid<T extends Light> extends Map<T> {
   }
 
   applyInstruction(instruction: Instruction) {
-    this.forEachMapCell((light, coordinate) => {
+    this.forEach((light, coordinate) => {
       instruction.apply(light, coordinate);
     });
   }
