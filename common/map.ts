@@ -92,4 +92,10 @@ export class Map<T> {
     );
     return accumulator;
   }
+
+  toString(): string {
+    return this.#map
+      .map((row) => row.map((cell) => cell.toString()).join(""))
+      .join("\n");
+  }
 }
