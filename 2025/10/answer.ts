@@ -1,97 +1,109 @@
-import { Memoize } from "fast-typescript-memoize";
 import { AnswerFunction } from "../../answer.ts";
 import { Maths } from "../../common/maths.ts";
 
 export const answer: AnswerFunction = async ([input]) => {
   const machines = input.split("\n").map(Machine.fromLine);
 
-  console.log(machines.length, "machines");
-  const fewestPresses = await Promise.all(
-    machines.map((machine, index) => {
-      try {
-        return machine.getFewestPresses();
-      } finally {
-        console.log(index + 1, "processed");
-      }
-    })
-  );
+  const fewestPressesForIndicators = machines
+    .map((machine, index) => machine.fewestPressesForIndicator)
+    .reduce((a, b) => a + b);
 
-  const fewestTotalPresses = fewestPresses.reduce((a, b) => a + b);
-  return [fewestTotalPresses];
+  return [fewestPressesForIndicators];
 };
 
-class Machine {
-  readonly #goalIndicator: Indicator;
-  readonly #buttons: Button[];
-  readonly #joltages: Joltages;
+interface Search {
+  button: Button;
+  indicator: Indicator;
+}
 
-  constructor(goalIndicator: Indicator, buttons: Button[], joltages: Joltages) {
-    this.#goalIndicator = goalIndicator;
+class Machine {
+  readonly #buttons: Button[];
+  readonly #goalIndicator: Indicator;
+  readonly #goalJoltage: Joltage;
+
+  constructor(
+    buttons: Button[],
+    goalIndicator: Indicator,
+    goalJoltage: Joltage
+  ) {
     this.#buttons = buttons;
-    this.#joltages = joltages;
+    this.#goalIndicator = goalIndicator;
+    this.#goalJoltage = goalJoltage;
   }
 
   static fromLine(line: string) {
     const parts = line.split(" ");
-    const goalIndicator = Indicator.fromString(parts.at(0));
     const buttons = parts.slice(1, -1).map(Button.fromString);
-    const joltages = Joltages.fromString(parts.at(-1));
-    return new Machine(goalIndicator, buttons, joltages);
+    const goalIndicator = Indicator.fromString(parts.at(0));
+    const goalJoltage = Joltage.fromString(parts.at(-1));
+    return new Machine(buttons, goalIndicator, goalJoltage);
   }
 
   toString() {
     return (
       "Machine(" +
-      [this.#goalIndicator, ...this.#buttons, this.#joltages]
+      [...this.#buttons, this.#goalIndicator, this.#goalJoltage]
         .map((s) => s.toString())
         .join(",") +
       ")"
     );
   }
 
-  @Memoize()
-  async getFewestPresses() {
-    const startIndicator = this.#goalIndicator.asStartState();
-    const search = this.#buttons.map((button) => {
-      const indicator = button.applyTo(startIndicator);
-      const diff = indicator.diff(this.#goalIndicator);
-      return { diff, indicator, buttonsPressed: [button] };
-    });
+  get fewestPressesForIndicator() {
+    const search: Search[][] = [
+      [{ indicator: this.#goalIndicator.asStartState() }]
+    ];
 
-    function sort() {
-      search.sort(
-        (
-          { buttonsPressed: { length: aButtons }, diff: aDiff },
-          { buttonsPressed: { length: bButtons }, diff: bDiff }
-        ) => aButtons - bButtons || aDiff - bDiff
-      );
+    for (let buttonsPressed = 1; true; buttonsPressed++) {
+      const prevSearch = search[buttonsPressed - 1];
+      const nextSearch = (search[buttonsPressed] = []);
+      for (const {
+        button: prevButton,
+        indicator: prevIndicator
+      } of prevSearch) {
+        for (const button of this.#buttons) {
+          if (button === prevButton) {
+            continue;
+          }
+
+          const indicator = button.applyToIndicator(prevIndicator);
+          if (!indicator.diff(this.#goalIndicator)) {
+            return buttonsPressed;
+          }
+
+          nextSearch.push({ button, indicator });
+        }
+      }
     }
+  }
+}
 
-    sort();
+class Button {
+  readonly #positions: number[];
 
-    while (search.at(0).diff) {
-      const { indicator: prevIndicator, buttonsPressed } = search.shift();
-      search.push(
-        ...this.#buttons.map((button) => {
-          const indicator = button.applyTo(prevIndicator);
-          const diff = indicator.diff(this.#goalIndicator);
-          return {
-            diff,
-            indicator,
-            buttonsPressed: [...buttonsPressed, button]
-          };
-        })
-      );
-      sort();
-      // console.log(
-      //   search.map(({ diff, indicator, buttonsPressed }) => ({
-      //     diff,
-      //     indicator: indicator.toString(),
-      //     buttonsPressed: buttonsPressed.map((s) => s.toString())
-      //   }))
-      // );
-    }
-    return search.at(0).buttonsPressed.length;
+  constructor(positions: number[]) {
+    this.#positions = positions;
+  }
+
+  static fromString(str: string): Button {
+    const positions = str
+      // assuming it starts with "(" and ends with ")"
+      .slice(1, -1)
+      .split(",")
+      .map(Maths.parseInt);
+    return new Button(positions);
+  }
+
+  applyToIndicator(indicator: Indicator): Indicator {
+    return indicator.toggleIndicator(this.#positions);
+  }
+
+  applyToJoltage(joltage: Joltage): Joltage {
+    return joltage.addJoltage(this.#positions);
+  }
+
+  toString() {
+    return "Button((" + this.#positions.join(",") + "))";
   }
 }
 
@@ -118,15 +130,12 @@ class Indicator {
     );
   }
 
-  toggleIndicators(positions: number[]) {
-    const newState = this.#state.map((light, index) =>
-      positions.includes(index) ? !light : light
+  toggleIndicator(positions: number[]) {
+    return new Indicator(
+      this.#state.map((light, index) =>
+        positions.includes(index) ? !light : light
+      )
     );
-    return new Indicator(newState);
-  }
-
-  equals(other: Indicator): boolean {
-    return this.#state.every((light, index) => other.#state[index] == light);
   }
 
   diff(other: Indicator): number {
@@ -146,48 +155,41 @@ class Indicator {
   }
 }
 
-class Button {
-  readonly #positions: number[];
+class Joltage {
+  readonly #state: number[];
 
-  constructor(positions: number[]) {
-    this.#positions = positions;
+  constructor(state: number[]) {
+    this.#state = state;
   }
 
-  static fromString(str: string): Button {
-    const positions = str
-      // assuming it starts with "(" and ends with ")"
-      .slice(1, -1)
-      .split(",")
-      .map(Maths.parseInt);
-    return new Button(positions);
-  }
-
-  applyTo(indicator: Indicator): Indicator {
-    return indicator.toggleIndicators(this.#positions);
-  }
-
-  toString() {
-    return "Button(" + this.#positions.join(",") + ")";
-  }
-}
-
-class Joltages {
-  readonly #joltages: number[];
-
-  constructor(joltages: number[]) {
-    this.#joltages = joltages;
-  }
-
-  static fromString(str: string): Joltages {
-    const joltages = str
+  static fromString(str: string): Joltage {
+    const state = str
       // assuming it starts with "{" and ends with "}"
       .slice(1, -1)
       .split(",")
       .map(Maths.parseInt);
-    return new Joltages(joltages);
+    return new Joltage(state);
+  }
+
+  asStartState(): Joltage {
+    return new Joltage(Array.from({ length: this.#state.length }), () => 0);
+  }
+
+  addJoltage(positions: []): Joltage {
+    const newState = this.#state.map((jolt, index) =>
+      positions.includes(index) ? ++jolt : jolt
+    );
+    return new Joltage(newState);
+  }
+
+  diff(other: Joltage): number {
+    return this.#state.reduce((diff, jolt, index) => {
+      const otherJolt = other.#state[index];
+      return diff + (otherJolt >= jolt ? otherJolt - jolt : Infinity);
+    }, 0);
   }
 
   toString() {
-    return "Joltages(" + this.#joltages.join(",") + ")";
+    return "Joltage({" + this.#state.join(",") + "})";
   }
 }
