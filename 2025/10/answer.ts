@@ -4,16 +4,27 @@ import { Maths } from "../../common/maths.ts";
 export const answer: AnswerFunction = async ([input]) => {
   const machines = input.split("\n").map(Machine.fromLine);
 
-  const fewestPressesForIndicators = machines
-    .map((machine, index) => machine.fewestPressesForIndicator)
-    .reduce((a, b) => a + b);
+  const fewestPressesForIndicators = machines.reduce(
+    (total, machine) => total + machine.fewestPressesForIndicator,
+    0
+  );
 
-  return [fewestPressesForIndicators];
+  const fewestPressesForJoltages = machines.reduce(
+    (total, machine) => total + machine.fewestPressesForJoltage,
+    0
+  );
+
+  return [fewestPressesForIndicators, fewestPressesForJoltages];
 };
 
-interface Search {
+interface IndicatorSearch {
   button: Button;
   indicator: Indicator;
+}
+
+interface JoltageSearch {
+  button: Button;
+  joltage: Joltage;
 }
 
 class Machine {
@@ -49,8 +60,8 @@ class Machine {
     );
   }
 
-  get fewestPressesForIndicator() {
-    const search: Search[][] = [
+  get fewestPressesForIndicator(): number {
+    const search: IndicatorSearch[][] = [
       [{ indicator: this.#goalIndicator.asStartState() }]
     ];
 
@@ -72,6 +83,31 @@ class Machine {
           }
 
           nextSearch.push({ button, indicator });
+        }
+      }
+    }
+  }
+
+  get fewestPressesForJoltage(): number {
+    const search: JoltageSearch[][] = [
+      [{ joltage: this.#goalJoltage.asStartState() }]
+    ];
+
+    for (let buttonsPressed = 1; true; buttonsPressed++) {
+      const prevSearch = search[buttonsPressed - 1];
+      const nextSearch = (search[buttonsPressed] = []);
+      for (const { button: prevButton, joltage: prevJoltage } of prevSearch) {
+        for (const button of this.#buttons) {
+          const joltage = button.applyToJoltage(prevJoltage);
+          const diff = joltage.diff(this.#goalJoltage);
+
+          if (!diff) {
+            return buttonsPressed;
+          }
+
+          if (diff !== Infinity) {
+            nextSearch.push({ button, indicator });
+          }
         }
       }
     }
