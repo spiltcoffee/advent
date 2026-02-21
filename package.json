@@ -23,7 +23,7 @@
     "bignumber.js": "^9.1.2",
     "color-rgba": "^3.0.0",
     "commander": "^14.0.2",
-    "eslint": "^9.39.1",
+    "eslint": "^10.0.1",
     "fast-typescript-memoize": "^1.2.1",
     "lodash.range": "^3.2.0",
     "lodash.zip": "^4.2.0",
@@ -32,7 +32,7 @@
     "temporal-polyfill": "^0.3.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.1"
+    "typescript-eslint": "^8.56.0"
   },
   "workspaces": [
     "prettier-plugin-advent"
